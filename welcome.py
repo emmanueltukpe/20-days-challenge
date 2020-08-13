@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 
 def age_check():
