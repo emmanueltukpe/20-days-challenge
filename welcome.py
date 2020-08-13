@@ -16,8 +16,7 @@ first_name = input("Provide your first name: ")
 last_name = input("Provide your last name: ")
 age = age_check()
 
-now = datetime.datetime.now()
-year = now.year
+year = datetime.now().year
 year_of_birth = year - age
 
 print(f"Hello {first_name} {last_name}",
