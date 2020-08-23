@@ -17,8 +17,7 @@ for x,y in zip(lines, second_lines):
 
 
 third_text_file= open("output_text_file.txt","w+")
-for n in new_word:
-    third_text_file.writelines(n)
+third_text_file.writelines(new_word)
 third_text_file.close()
     
     
