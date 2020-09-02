@@ -7,7 +7,7 @@ chosen_word = random.choice(words).upper()
 
 
 def play_hangman(chosen_word):
-    answer = ""
+    answer = " "
     guessed = False
     guessed_letter = []
     print("Let's play hangman!")
