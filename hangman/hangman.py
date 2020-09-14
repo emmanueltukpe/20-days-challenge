@@ -3,17 +3,25 @@ import re
 import sys
 
 
-words = ["Antartica", "Mississippi", "Opulent", "Capricious", "Xenophobe"]
-chosen_word = random.choice(words).upper()
+def word_library():
+    words = ["Antartica", "Mississippi", "Opulent", "Capricious", "Xenophobe"]
+    chosen_word = random.choice(words).upper()
+    return chosen_word
+chosen_word = word_library()
 
-def play_hangman(chosen_word):
+
+def hangman_algorithm():
     answer = {}
     for letter in chosen_word:
         answer[letter] = False
+    return answer
+answer = hangman_algorithm()
+
+
+def play_hangman(chosen_word):
     guessed = False
     guessed_letter = []
-    tries = 0
-    
+    tries = 0    
     while not guessed:
         print("Let's play hangman!")
         print("\n")
