@@ -4,6 +4,8 @@ import sys
 
 
 def word_library():
+    # this generates a word at random for the hangman game
+
     words = ["Antartica", "Mississippi", "Opulent", "Capricious", "Xenophobe"]
     chosen_word = random.choice(words).upper()
     return chosen_word
@@ -11,6 +13,9 @@ chosen_word = word_library()
 
 
 def hangman_algorithm():
+    # the random word generated is stored in a dictionary
+    # all the characters in the word are set to false
+
     answer = {}
     for letter in chosen_word:
         answer[letter] = False
@@ -19,6 +24,8 @@ answer = hangman_algorithm()
 
 
 def play_hangman(chosen_word):
+    # takes input from the user, enabling him to play hangman.
+
     guessed = False
     guessed_letter = []
     tries = 0    
