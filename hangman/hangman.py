@@ -9,60 +9,96 @@ def word_library():
     words = ["Antartica", "Mississippi", "Opulent", "Capricious", "Xenophobe"]
     chosen_word = random.choice(words).upper()
     return chosen_word
-chosen_word = word_library()
 
+chosen_word = word_library()
 
 def hangman_algorithm():
     # the random word generated is stored in a dictionary
     # all the characters in the word are set to false
 
-    answer = {}
+    answers = {}
     for letter in chosen_word:
-        answer[letter] = False
-    return answer
-answer = hangman_algorithm()
+        answers[letter] = False
+    return answers
+answers = hangman_algorithm()
 
+def check_function():
+    check_answers = {}
+    for letter in chosen_word:
+        check_answers[letter] = True
+    return check_answers
+check_answers = check_function()
+
+def display_current_guess(answer, chosen_word, guess):
+    #The function also takes correct guesses and prints out the position of each guesssed letter.
+    
+
+    word_as_list = list(answer)
+    guessed_index = [i for i, letter in enumerate(chosen_word) if letter == guess]
+    for letter in guessed_index:
+        word_as_list[letter] = guess
+    answer = "".join(word_as_list)
+    return answer
 
 def play_hangman(chosen_word):
     # takes input from the user, enabling him to play hangman.
-
+    
+    answer = "_" * len(chosen_word)
     guessed = False
     guessed_letter = []
-    tries = 0    
-    while not guessed:
-        print("Let's play hangman!")
-        print("\n")
-        tries += 1
+    tries = 5
+    print("Let's play hangman!")
+    print("You have 5 tries, goodluck")
+    print(answer)
+    print("\n")
+
+    while not guessed and tries > 0:
+
         guess = input("Please guess a letter: ").upper()
         
-        if tries == 1:
-            print (f"You have made {tries} try")
-        else:
-            print (f"You have made {tries} tries")
-
         if guess == "!":
-            print(answer)
+            print(f"The word was {chosen_word}. Better luck next time")
             sys.exit(0)
 
         else:
             print("Press ! to exit game")           
             if len(guess) == 1 and guess.isalpha():
                 if guess in guessed_letter:
-                    print("You already guessed the letter", guess)
+                    tries -= 1
+                    print("You already guessed the letter")
+                    if tries is 1:
+                        print (f'You have only a try left')
+                    else:
+                        print(f'You have {tries} tries left')
 
                 elif guess not in chosen_word:
-                    print(guess, "NO")
+                    tries -= 1
+                    print(guess)
+                    if tries is 1:
+                        print (f'Oops you are wrong, You have only a try left')
+                    else:
+                        print(f'Oops you are wrong, You have {tries} tries left')
                     guessed_letter.append(guess)
 
                 else:
                     guessed_letter.append(guess)
-                    guessed_index = [n for n in range(
-                        len(chosen_word)) if chosen_word.find(guess, n) == n]
-                    print("YES", guessed_index)
-                    answer[guess] = True
+                    answers[guess] = True
+                    answer = display_current_guess(answer, chosen_word, guess)
+                    if answers == check_answers:
+                        guessed = True
 
             else:
-                print("NO")
+                tries -= 1
+                if tries is 1:
+                    print (f'Not valid, enter an actual letter!, You have only a try left')
+                else:
+                    print(f"Not valid, enter an actual letter! You have {tries} tries left")
 
+        print(answer)
+        print("\n")    
+    if guessed:
+         print("Congrats, you've guessed the word! You won!")
+    else:
+        print("Sorry, you've run out of tries. The word was " + chosen_word + ". Maybe next time!")
 
-print(play_hangman(chosen_word))
+play_hangman(chosen_word)
