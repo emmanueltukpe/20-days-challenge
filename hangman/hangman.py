@@ -1,16 +1,32 @@
 import random
 import re
 import sys
+import glob
+import os
 
 
-def word_library():
+def get_target_words():
     # this generates a word at random for the hangman game
 
-    words = ["Antartica", "Mississippi", "Opulent", "Capricious", "Xenophobe"]
-    chosen_word = random.choice(words).upper()
-    return chosen_word
+    curdir = os.path.join(os.path.dirname(__file__), 'data\words.txt')
 
-chosen_word = word_library()
+    print (curdir)
+    glob.glob('words.txt')
+
+    library = open(curdir, "r")
+
+    words_in_list = library.readlines()
+    words = []
+
+    for word in words_in_list:
+        words.append(word.strip())
+
+    chosen_word = random.choice(words).upper() 
+    library.close()
+    return chosen_word
+chosen_word = get_target_words()
+
+
 
 def hangman_algorithm():
     # the random word generated is stored in a dictionary
