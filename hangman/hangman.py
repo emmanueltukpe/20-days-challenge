@@ -8,12 +8,7 @@ import os
 def get_target_words():
     # this generates a word at random for the hangman game
 
-    curdir = os.path.join(os.path.dirname(__file__), 'data\words.txt')
-
-    print (curdir)
-    glob.glob('words.txt')
-
-    library = open(curdir, "r")
+    library = open('hangman/data/words.txt', "r")
 
     words_in_list = library.readlines()
     words = []
