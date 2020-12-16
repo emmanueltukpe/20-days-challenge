@@ -1,5 +1,5 @@
 import re
-from .utils import chosen_word
+from hangman.lib.utils import chosen_word
 
 guess = ''
 def hangman_algorithm():
